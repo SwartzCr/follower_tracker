@@ -33,7 +33,7 @@ def log(lost_followers, last_tweet):
         f.write(out)
 
 def diff(old_followers, cur_followers):
-    return [follower for follower in cur_followers.difference(old_followers)]
+    return [follower for follower in old_followers.difference(cur_followers)]
 
 
 def main():
