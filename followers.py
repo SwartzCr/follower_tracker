@@ -44,10 +44,10 @@ def main():
         followers_list = twitter.get_followers_ids(user_id=user_id, cursor=cursor_str)
         cur_followers += followers_list['ids']
         cursor_str = followers_list['next_cursor_str']
-    cur_followers = set(cur_followers)
-    old_followers = load_followers()
+    cur_followers_set = set(cur_followers)
+    old_followers_set = set(load_followers())
     save_followers(cur_followers)
-    lost_followers = diff(old_followers, cur_followers)
+    lost_followers = diff(old_followers_set, cur_followers_set)
     if len(lost_followers) > 0:
         last_tweet = twitter.get_user_timeline(user_id=user_id, count=1)[0]['text']
         lost_followers_names = [twitter.lookup_user(user_id=user)[0]['screen_name'] for user in lost_followers]
